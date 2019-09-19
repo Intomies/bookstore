@@ -13,6 +13,7 @@ import java.util.List;
 
 import hh.swd20.bookstore.domain.Book;
 import hh.swd20.bookstore.domain.BookRepository;
+import hh.swd20.bookstore.domain.CategoryRepository;
 
 
 @Controller
@@ -21,6 +22,9 @@ public class bookstoreController {
 	
 	@Autowired
 	BookRepository bookRepository;
+	
+	@Autowired
+	private CategoryRepository catrepository;
 	
 	//Indeksisivu
 	@GetMapping("/index")
@@ -42,6 +46,7 @@ public class bookstoreController {
 	@GetMapping("/newbook")
 	public String getEmptyBookForm(Model model) {
 	model.addAttribute("book", new Book());
+	model.addAttribute("categories", catrepository.findAll());
 	return "addbookform";
 	
 	}
@@ -66,6 +71,7 @@ public class bookstoreController {
 	@RequestMapping(value = "/editbook/{id}")
 	public String editBook(@PathVariable("id") Long bookId, Model model) {
 		model.addAttribute("book", bookRepository.findById(bookId));
+		model.addAttribute("categories", catrepository.findAll());
 		return "editbookform";
 		
 	}

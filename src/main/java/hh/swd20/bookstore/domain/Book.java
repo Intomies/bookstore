@@ -4,19 +4,25 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Book {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String title;
 	private String author;
 	private String isbn;
 	private int year;
 	private double price;
-	
+
+	@ManyToOne
+	@JoinColumn(name = "categoryId")
+	private Category category;
+
 	public Book() {
 		super();
 		this.id = null;
@@ -25,9 +31,10 @@ public class Book {
 		this.isbn = null;
 		this.year = 0;
 		this.price = 0;
+		this.category = null;
 	}
-	
-	public Book(Long id, String title, String author, String isbn, int year, double price) {
+
+	public Book(Long id, String title, String author, String isbn, int year, double price, Category category) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -35,15 +42,17 @@ public class Book {
 		this.isbn = isbn;
 		this.year = year;
 		this.price = price;
+		this.category = category;
 	}
-	
-	public Book(String title, String author, String isbn, int year, double price) {
+
+	public Book(String title, String author, String isbn, int year, double price, Category category) {
 		super();
 		this.title = title;
 		this.author = author;
 		this.isbn = isbn;
 		this.year = year;
 		this.price = price;
+		this.category = category;
 	}
 
 	public void setId(Long id) {
@@ -70,6 +79,10 @@ public class Book {
 		this.price = price;
 	}
 
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -94,12 +107,19 @@ public class Book {
 		return price;
 	}
 
+	public Category getCategory() {
+		return category;
+	}
+
 	@Override
 	public String toString() {
-		return "Book [id=" + id + ", title=" + title + ", author=" + author + ", isbn=" + isbn + ", year=" + year + ", price=" + price
-				+ "]";
+		if (this.category != null)
+			return "Book [id=" + id + ", title=" + title + ", author=" + author + ", isbn=" + isbn + ", year=" + year
+					+ ", price=" + price + ", category=" + this.getCategory() + "]";
+		else
+			return "Book [id=" + id + ", title=" + title + ", author=" + author + ", isbn=" + isbn + ", year=" + year
+					+ ", price=" + price +  "]";
+		
 	}
-	
 
-	
 }
