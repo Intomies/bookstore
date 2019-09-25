@@ -7,9 +7,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
+import java.util.Optional;
 
 import hh.swd20.bookstore.domain.Book;
 import hh.swd20.bookstore.domain.BookRepository;
@@ -17,7 +20,6 @@ import hh.swd20.bookstore.domain.CategoryRepository;
 
 
 @Controller
-
 public class bookstoreController {
 	
 	@Autowired
@@ -34,12 +36,30 @@ public class bookstoreController {
 	}
 	
 	//Kirjojen listaaminen
-	@GetMapping("/books")
+	@GetMapping("/booklist")
 	public String getBooks(Model model) {
 		List<Book> books = (List<Book>) bookRepository.findAll();
 		model.addAttribute("books", books);
 		return "booklist";
 		
+	}
+	
+	//Restful get all books
+	@GetMapping("/books")
+	public @ResponseBody List<Book> getBooksRest() {
+		return (List<Book>) bookRepository.findAll();
+	}
+	
+	//Restful get book by id
+	@GetMapping("books/{id}")
+	public @ResponseBody Optional<Book> getBookRest(@PathVariable("id") Long bookId) {
+		return bookRepository.findById(bookId);
+	}
+	
+	//Restful save new book
+	@PostMapping("/books")
+	public @ResponseBody Book saveBookRest(@RequestBody Book book) {
+		return bookRepository.save(book);
 	}
 	
 	//Tyhjä lomake
