@@ -28,6 +28,11 @@ public class bookstoreController {
 	@Autowired
 	private CategoryRepository catrepository;
 	
+    @RequestMapping(value="/login")
+    public String login() {	
+        return "login";
+    }
+	
 	//Indeksisivu
 	@GetMapping("/index")
 	public String sayHello() {
