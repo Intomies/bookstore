@@ -3,10 +3,25 @@
 <head>
     <title>Edit Book</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<link type="text/css"rel="stylesheet" href="./css/bootstrap.min.css" th:href="@{./css/bootstrap.min.css}" /> 
+	<link type="text/css" rel="stylesheet" href="../css/bootstrap.min.css"
+	th:href="@{../css/bootstrap.min.css}" />
 </head>
+
 <body>
-	<h1>Edit Book</h1>
+
+	<nav style="background-color: gray; padding: 0px 5px 0px 5px;">
+	<a href="/booklist" class="btn btn-success">Booklist</a>
+	<a href="/index" class="btn btn-success">Back to Index</a>
+	<div style="float: right;">
+		<form th:action="@{/logout}" method="post">
+		<input type="submit" value="Sign Out" class="btn btn-danger" />
+		</form>
+	</div>  
+	</nav>
+
+	<h1 style="padding: 5px">Edit Book</h1>
+	
+	<div class="input-form" style="padding: 5px">
 	<form action="#" th:action="@{/newbook}"  th:object= ${book} method="post">
 	<input type="hidden" th:field="${book.id}" class="form-control" />
 	<p>Title: <input type="text" th:field="${book.title}" /></p>
@@ -22,9 +37,8 @@
 		</select>
 	<div style="clear: both; display: block; height: 10px;"></div>
 	<input type="submit" value="Submit" /> <input type="reset" value="Reset" />
-	</form><br>
-	
-	<a href="/booklist">Back</a><br>
-	<a href="/index">Back to Index</a>   
+	</form>
+	</div>
+	  
 </body>
 </html>

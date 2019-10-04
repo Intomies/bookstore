@@ -8,26 +8,24 @@
 </head>
 <body>
 
-	<div class="col-md-4">
-		<h1>Students</h1>
-	</div>
-	<div class="col-md-4">
-		<h3 th:inline="text">Welcome
-			[[${#httpServletRequest.remoteUser}]]</h3>
-	</div>
-	<div class="col-md-4" style="padding: 20px 0">
-		<form th:action="@{/logout}" method="post">
+	<nav style="background-color: gray; padding: 0px 5px 0px 5px;">
+		<a href="/booklist" class="btn btn-success">Booklist</a>
+		<a sec:authorize="hasAuthority('ADMIN')" href="/newbook" class="btn btn-success">New Book</a>	
+		<div style="float: right;">
+			<form th:action="@{/logout}" method="post">
 			<input type="submit" value="Sign Out" class="btn btn-danger" />
-		</form>
+			</form>
+		</div>
+	</nav>
+
+	<div class="col-md-4" style="padding: 5px" >
+	<h1>Bookstore</h1>
 	</div>
+	<div class="col-md-4" style="padding: 5px">
+	<h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]!</h3>
+	</div>
+	<p style="padding: 5px">This is the starting page of my bookstore project.</p>
 
-	<h1>Welcome!</h1>
-
-	<p>This is the starting page of my bookstore project.</p>
-	<br>
-	<a sec:authorize="hasRole('ADMIN')" href="/newbook" class="btn btn-success">New Book</a>
-	<br>
-	<a href="/booklist">Booklist</a>
-	<br>
+	
 </body>
 </html>
