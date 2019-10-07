@@ -33,9 +33,16 @@ public class bookstoreController {
     public String login() {	
         return "login";
     }
-	
+    
 	//Indeksisivu
 	@GetMapping("/")
+	public String sayFirstHello() {
+		return "bookstoreindex";
+
+	}
+	
+	//Indeksisivu
+	@GetMapping("/index")
 	public String sayHello() {
 		return "bookstoreindex";
 
