@@ -24,7 +24,7 @@ public class BookstoreApplication {
 	}
 
 	@Bean
-	public CommandLineRunner carDemo(BookRepository bookRepository, CategoryRepository catRepository,
+	public CommandLineRunner bookstoreCLR(BookRepository bookRepository, CategoryRepository catRepository,
 			UserRepository uRepository) {
 		return (args) -> {
 			log.info("create categories");
@@ -41,6 +41,7 @@ public class BookstoreApplication {
 			bookRepository.save(new Book("Uutta Tietoa", "Viisas Tietäjä", "978-951-98548-9-4", 2018, 15.95, science));
 
 			// Create users: admin/admin user/user
+			log.info("create users");
 			uRepository.save(new User("user", "user@useremail.com",
 					"$2a$06$3jYRJrg0ghaaypjZ/.g4SethoeA51ph3UD4kZi9oPkeMTpjKU5uo6", "USER"));
 			uRepository.save(new User("admin", "admin@bookstore.com",
